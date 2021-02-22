@@ -25,8 +25,8 @@ defmodule WordCount do
     end)
   end
 
-  defp strip_punctuation(chars) do
-    chars
+  defp strip_punctuation(string) do
+    string
     |> String.graphemes()
     |> Enum.reject(&is_punctuation/1)
     |> Enum.join()
