@@ -20,9 +20,11 @@ defmodule WordCount do
   #felt like Enum.frequencies was probably 'cheating' here
   defp calculate_frequencies(string_list) do
     string_list
-    |> Enum.reduce(%{}, fn s, acc ->
-      Map.update(acc, s, 1, fn existing -> existing + 1 end)
-    end)
+    |> Enum.reduce(%{}, &increment_frequency_bucket/2)
+  end
+
+  defp increment_frequency_bucket(bucket, histogram) do
+    Map.update(histogram, bucket, 1, fn existing -> existing + 1 end)
   end
 
   defp strip_punctuation(string) do
